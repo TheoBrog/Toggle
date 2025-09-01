@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: 8ff3de2284f13da4f8a76b85f1ce8b46
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - damageClip: {fileID: 8300000, guid: cabf5c434a9a4c84694244c9d91a91fe, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
