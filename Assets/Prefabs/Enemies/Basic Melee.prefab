@@ -85,6 +85,7 @@ MonoBehaviour:
   enemyName: Test Enemy
   enemyType: 0
   damageClip: {fileID: 8300000, guid: cabf5c434a9a4c84694244c9d91a91fe, type: 3}
+  flash: {fileID: 8727590633720245037, guid: f551afe94d4d8f243a9a8c0ce402d52f, type: 3}
   walkspeed: 4
   runSpeed: 10
   height: 0

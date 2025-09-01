@@ -30,6 +30,8 @@ public class BasicShooter : EnemyShooter
                 if (delay >= maxDelay)
                 {
                     delay = 0;
+                    PlayFlash();
+                    yield return new WaitForSeconds(.5f);
                     Fire(player.transform);
                 }
 

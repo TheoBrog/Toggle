@@ -11,12 +11,16 @@ public class ParryFlash : MonoBehaviour
     private Color originalColor;
     private Vector3 initialScale;
 
+    public AudioClip audioClip;
+
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalColor = spriteRenderer.color;
         initialScale = transform.localScale;
 
+        if (audioClip != null)
+            SoundManager.instance.Play(audioClip);
         StartCoroutine(LifeTime());
     }
 

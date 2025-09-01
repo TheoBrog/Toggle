@@ -1,2 +1,15 @@
 fileFormatVersion: 2
 guid: 884057f0fd778274b8649269066dfe97
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - damageClip: {instanceID: 0}
+  - floorDetectionObject: {instanceID: 0}
+  - attackObject: {instanceID: 0}
+  - flash: {fileID: 8727590633720245037, guid: f551afe94d4d8f243a9a8c0ce402d52f, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

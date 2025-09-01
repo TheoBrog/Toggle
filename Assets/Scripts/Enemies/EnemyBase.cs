@@ -35,6 +35,7 @@ public class EnemyBase : MonoBehaviour
     DamageFlash damageFlash;
 
     public AudioClip damageClip;
+    public GameObject flash;
 
     protected virtual void Start()
     {
@@ -63,6 +64,14 @@ public class EnemyBase : MonoBehaviour
         GameManager.instance.enemiesInScene.Remove(transform.gameObject);
         Destroy(transform.gameObject);
         GameManager.enemyDeath?.Invoke(transform.gameObject);
+    }
+
+    protected virtual void PlayFlash()
+    {
+        GameObject pf = Instantiate(flash);
+        pf.transform.SetParent(null);
+        pf.transform.position = transform.position;
+        pf.transform.localEulerAngles = Vector3.zero;
     }
 
     public void DeleteEnemy()

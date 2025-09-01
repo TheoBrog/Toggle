@@ -3514,10 +3514,6 @@ PrefabInstance:
       propertyPath: toggleDelayUI
       value: 
       objectReference: {fileID: 3429933444764691154}
-    - target: {fileID: 1678480268259671237, guid: e7ca99f63fda2e84f8958ef95738b071, type: 3}
-      propertyPath: playerSounds.parrySound
-      value: 
-      objectReference: {fileID: 8300000, guid: 2cfd952950cdb9e46b39028a7bcd5cd9, type: 3}
     - target: {fileID: 2932996720642967599, guid: e7ca99f63fda2e84f8958ef95738b071, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7

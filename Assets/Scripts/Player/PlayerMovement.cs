@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -252,8 +253,26 @@ public class PlayerMovement :    MonoBehaviour
 
         SoundManager.instance.Play(playerSounds.swingAttack);
 
+        // animation
+        if (!pauseAnim)
+        {
+            pauseAnim = true;
+            List<string> compatible = new()
+            {
+                "Idle",
+                "Walk",
+                "Jump"
+            };
+
+            if (compatible.Contains(currentAnimation))
+                ChangeAnimation(currentAnimation + " Attack");
+            else
+                ChangeAnimation("Idle Attack");
+        }
+
+
         //get direction
-        float horizontal = moveInput.x;
+            float horizontal = moveInput.x;
         float vertical = moveInput.y;
 
         Vector2 dir = new Vector2(horizontal, vertical);
@@ -276,6 +295,8 @@ public class PlayerMovement :    MonoBehaviour
 
         attackObject.SetActive(false);
         yield return new WaitForSeconds(.1f);
+
+        pauseAnim = false;
 
         state = PlayerState.idle;
     }
@@ -303,7 +324,7 @@ public class PlayerMovement :    MonoBehaviour
         state = PlayerState.dashing;
 
         pauseAnim = true;
-        ChangeAnimation("DashAnim");
+        ChangeAnimation("Dash");
         SoundManager.instance.Play(playerSounds.dashSound, 1, Random.Range(.8f, 1.2f));
 
         spdY = 0;
@@ -392,14 +413,14 @@ public class PlayerMovement :    MonoBehaviour
         if (pauseAnim == true)
             return;
 
-        if (spdY > 0)
+        if (spdY > 2)
         {
-            ChangeAnimation("JumpAnim");
+            ChangeAnimation("Jump");
             return;
         }
-        else if (spdY < 0)
+        else if (spdY < -5)
         {
-            ChangeAnimation("FallAnim");
+            ChangeAnimation("Fall");
             return;
         }
 
@@ -407,9 +428,9 @@ public class PlayerMovement :    MonoBehaviour
             return;
 
         if (horizontalAxis != 0)
-            ChangeAnimation("WalkAnim");
+            ChangeAnimation("Walk");
         else
-            ChangeAnimation("IdleAnim");
+            ChangeAnimation("Idle");
     }
 
     void CameraControl()

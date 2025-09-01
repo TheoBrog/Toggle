@@ -66,6 +66,7 @@ public class BasicMelee : EnemyLeftAndRight
         currentState = EnemyState.Attacking;
         rb.linearVelocity = Vector3.zero;
         LookAtPlayer();
+        PlayFlash();
         yield return new WaitForSeconds(.5f);
         // Debug.Log("attack");
         attackObject.SetActive(true);
