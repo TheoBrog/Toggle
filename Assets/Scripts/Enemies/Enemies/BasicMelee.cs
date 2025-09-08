@@ -7,9 +7,13 @@ public class BasicMelee : EnemyLeftAndRight
     public float maxMemory = 5f; // Max time to the enemy forget the player
     float enemyMemory = 0f;
 
+    Animator anim;
+
     [Header("Attacking")]
     public float attackDistance = 1f;
     public GameObject attackObject;
+    GameObject attackHitbox;
+    Animator attackAnim;
     public float attackTime = 1f;
 
     [Header("Extra")]
@@ -19,7 +23,12 @@ public class BasicMelee : EnemyLeftAndRight
     {
         base.Start();
 
+        attackHitbox = attackObject.transform.GetChild(0).gameObject;
         attackObject.SetActive(false);
+        attackAnim = attackHitbox.GetComponent<Animator>();
+
+        anim = GetComponentInChildren<Animator>();
+
         StartCoroutine(DelayedUpdate(0.1f));
     }
 
@@ -32,9 +41,20 @@ public class BasicMelee : EnemyLeftAndRight
             DetectState();
 
             if (currentState == EnemyState.Patroling)
+            {
                 Patrol();
+                if (rb.linearVelocity.y > -1)
+                    anim.Play("Walk");
+            }
             else if (currentState == EnemyState.Chasing)
+            {
                 Chase();
+                if (rb.linearVelocity.y > -1)
+                    anim.Play("Run");
+            }
+
+            if (rb.linearVelocity.y < -1 && currentState != EnemyState.Attacking)
+                anim.Play("Fall");
 
             enemyMemory -= delay;
 
@@ -67,14 +87,18 @@ public class BasicMelee : EnemyLeftAndRight
         rb.linearVelocity = Vector3.zero;
         LookAtPlayer();
         PlayFlash();
+        attackObject.transform.LookAt(player.transform);
+        if (player.transform.position.y > transform.position.y + 1)
+            anim.Play("AttackUp", -1, 0);
+        else
+            anim.Play("AttackDown", -1, 0);
         yield return new WaitForSeconds(.5f);
-        // Debug.Log("attack");
         attackObject.SetActive(true);
-        Vector3 pos = attackObject.transform.localPosition;
-        attackObject.transform.localPosition = new Vector3(Mathf.Abs(pos.x) * sign, 0, 0);
-        attackObject.GetComponent<DamageBlock>().knockback = sign;
+        attackAnim.Play("SlashAnim");
+        attackHitbox.GetComponent<DamageBlock>().knockback = sign;
         SoundManager.instance.Play(enemySounds.swingAttack, 1, Random.Range(0.9f, 1.1f));
         yield return new WaitForSeconds(attackTime);
+        attackAnim.StopPlayback();
         attackObject.SetActive(false);
         yield return new WaitForSeconds(attackTime * 1.5f);
         currentState = EnemyState.Chasing;

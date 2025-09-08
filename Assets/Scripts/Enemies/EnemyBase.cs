@@ -21,21 +21,28 @@ public enum EnemyState
 public class EnemyBase : MonoBehaviour
 {
     [Header("Enemy Basics")]
+    // Basics
     public float maxHealth = 100f;
     protected float health;
 
     public string enemyName = "Basic Enemy";
 
+    // States
     public EnemyType enemyType;
     protected EnemyState currentState = EnemyState.Patroling;
 
+    // Components
     protected Rigidbody rb;
     protected GameObject player;
 
-    DamageFlash damageFlash;
-
+    // Quality of Life
     public AudioClip damageClip;
     public GameObject flash;
+
+    DamageFlash damageFlash;
+    
+    public GameObject[] deadObj;
+    protected bool isAlive = true;
 
     protected virtual void Start()
     {
@@ -60,10 +67,36 @@ public class EnemyBase : MonoBehaviour
 
     protected virtual void EnemyDie()
     {
-        // Debug.Log("Killed " + enemyName);
+        isAlive = false;
+
         GameManager.instance.enemiesInScene.Remove(transform.gameObject);
-        Destroy(transform.gameObject);
         GameManager.enemyDeath?.Invoke(transform.gameObject);
+
+        if (deadObj.Length > 0)
+        {
+            foreach (Transform child in gameObject.transform)
+            {
+                child.gameObject.SetActive(false);
+            }
+            foreach (GameObject d in deadObj)
+            {
+                d.SetActive(true);
+                SpriteRenderer s = d.GetComponent<SpriteRenderer>();
+                
+                s.flipX = transform.GetChild(0).GetComponent<SpriteRenderer>().flipX;
+                s.color = Color.gray;
+            }
+        }
+        else
+            Destroy(gameObject);
+                    
+        foreach (var comp in GetComponents<MonoBehaviour>())
+        {
+            Destroy(comp);
+        }    
+    
+        // Debug.Log("Killed " + enemyName);
+        // Destroy(transform.gameObject);
     }
 
     protected virtual void PlayFlash()

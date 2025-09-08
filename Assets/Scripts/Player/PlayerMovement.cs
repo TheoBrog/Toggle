@@ -44,8 +44,7 @@ public class PlayerMovement :    MonoBehaviour
 
     public float cameraOffset;
     public float cameraSmoothSpeed;
-    public float cameraY;
-
+    float cameraY;
 
     [Header("Player Components")]
     Rigidbody rig;
@@ -112,6 +111,7 @@ public class PlayerMovement :    MonoBehaviour
         mainCamera = Camera.main.gameObject;
         // fazer camera ser parent
         mainCamera.transform.parent = transform;
+        cameraY = mainCamera.transform.position.y;
 
         //QualitySettings.vSyncCount = 0;
         //Application.targetFrameRate = 10;

@@ -31,7 +31,8 @@ Material:
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
-  disabledShaderPasses: []
+  disabledShaderPasses:
+  - MOTIONVECTORS
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -55,6 +56,8 @@ Material:
     m_Ints: []
     m_Floats:
     - _FlashAmount: 0
+    - _QueueControl: 0
+    - _QueueOffset: 0
     m_Colors:
     - _FlashColor: {r: 23.968628, g: 23.968628, b: 23.968628, a: 1}
   m_BuildTextureStacks: []

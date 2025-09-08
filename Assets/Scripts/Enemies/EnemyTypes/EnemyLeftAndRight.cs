@@ -16,13 +16,13 @@ public class EnemyLeftAndRight : EnemyBase
     public bool avoidFalling = true;
     public Transform floorDetectionObject;
 
-    SpriteRenderer spriteRenderer;
+    SpriteRenderer[] spriteRenderers;
 
     protected override void Start()
     {
         base.Start();
 
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
     }
 
     protected void Patrol()
@@ -56,8 +56,8 @@ public class EnemyLeftAndRight : EnemyBase
         Vector3 fdo = floorDetectionObject.transform.localPosition;
         fdo.x *= -1;
         floorDetectionObject.transform.localPosition = fdo;
-        if (spriteRenderer != null)
-            spriteRenderer.flipX = direction < 0;
+        if (spriteRenderers != null)
+            ChangeDirection(direction < 0);
     }
     #endregion
 
@@ -69,10 +69,18 @@ public class EnemyLeftAndRight : EnemyBase
         LookAtPlayer();
     }
 
+    protected void ChangeDirection(bool statement)
+    {
+        if (spriteRenderers == null) return;
+        foreach (SpriteRenderer s in spriteRenderers)
+        {
+            s.flipX = statement;
+        }
+    }
+
     protected void LookAtPlayer()
     {
-        if (spriteRenderer == null) return;
-        spriteRenderer.flipX = transform.position.x > player.transform.position.x;
+        ChangeDirection(transform.position.x > player.transform.position.x);
     }
 
     void Reset()

@@ -6,6 +6,7 @@ public class EnemyDoor : MonoBehaviour
 {
     public EnemyWave[] enemyList;
     List<GameObject> enemies = new();
+    List<GameObject> deadEnemies = new();
 
     public GameObject[] doors;
     bool spawned = false;
@@ -83,6 +84,7 @@ public class EnemyDoor : MonoBehaviour
         // Debug.Log("End Waves");
         Door(false);
         ended = true;
+        GameManager.onDeath -= ResetDoors;
     }
 
     void Door(bool state)
@@ -130,6 +132,7 @@ public class EnemyDoor : MonoBehaviour
         if (enemies.Contains(enemy))
         {
             enemies.Remove(enemy);
+            deadEnemies.Add(enemy);
         }
     }
     #endregion
@@ -137,26 +140,31 @@ public class EnemyDoor : MonoBehaviour
     #region Reseting
     void ResetDoors()
     {
+        // Evitar bugs
         if (ended)
             return;
         currentWave = 9999;
+        // Deletar os inimigos que existem
         foreach (GameObject obj in enemies)
         {
             if (obj != null)
                 obj.GetComponent<EnemyBase>().DeleteEnemy();
         }
+        foreach (GameObject obj in deadEnemies)
+            Destroy(obj);
         enemies.Clear();
+        deadEnemies.Clear();
+
+        // Fechar as portas e ligar triggers
         Door(false);
         if (fromTrigger != null)
             fromTrigger.SetActive(true);
         spawned = false;
-        
-        GameManager.onDeath -= ResetDoors;
     }    
 
     void OnEnable()
     {
-        // Inscreve a função AbrirPorta para ser chamada quando OnDeath for disparado
+        // Inscreve os devidos eventos
         GameManager.onDeath += ResetDoors;
         GameManager.enemyDeath += EnemyDied;
     }
