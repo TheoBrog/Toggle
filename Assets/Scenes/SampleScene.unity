@@ -12467,6 +12467,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Music Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 5182820686747847128, guid: 2c469546b8599104193c3ae814412d80, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: fab40a24e47084b40bd9b63f842fbfc4, type: 3}
+    - target: {fileID: 5182820686747847128, guid: 2c469546b8599104193c3ae814412d80, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: fab40a24e47084b40bd9b63f842fbfc4, type: 3}
     - target: {fileID: 5477700113814135802, guid: 2c469546b8599104193c3ae814412d80, type: 3}
       propertyPath: m_LocalPosition.x
       value: 73.88834
@@ -12709,6 +12717,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1573796842}
+    - target: {fileID: 1618987534098265022, guid: aabb1a85d47ee6a41add85758c48f450, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Menu
+      objectReference: {fileID: 0}
     - target: {fileID: 1808909518169446369, guid: aabb1a85d47ee6a41add85758c48f450, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -12793,10 +12805,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1573796842}
+    - target: {fileID: 2181221547150554622, guid: aabb1a85d47ee6a41add85758c48f450, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ClosePauseMenu
+      objectReference: {fileID: 0}
     - target: {fileID: 8372120736947014823, guid: aabb1a85d47ee6a41add85758c48f450, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1573796842}
+    - target: {fileID: 8372120736947014823, guid: aabb1a85d47ee6a41add85758c48f450, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SettingsButton
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

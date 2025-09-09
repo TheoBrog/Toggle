@@ -29,6 +29,8 @@ public class PlayerMovement :    MonoBehaviour
     public bool canMove = true;
     public bool canFall = true;
 
+    public GameObject playerObj;
+
 
     [Header("Player UI")]
     public Image toggleDelayUI;
@@ -58,7 +60,7 @@ public class PlayerMovement :    MonoBehaviour
     [Header("Horizontal Movement")]
     public float horizontalSpeed;
     float horizontalAxis;
-    float playerDirection = 1;
+    public float playerDirection = 1;
 
     public float dashPower;
     public float dashLength;
@@ -109,9 +111,6 @@ public class PlayerMovement :    MonoBehaviour
         stamina = 1;
 
         mainCamera = Camera.main.gameObject;
-        // fazer camera ser parent
-        mainCamera.transform.parent = transform;
-        cameraY = mainCamera.transform.position.y;
 
         //QualitySettings.vSyncCount = 0;
         //Application.targetFrameRate = 10;
@@ -129,7 +128,6 @@ public class PlayerMovement :    MonoBehaviour
 
         AttackInput();
         Dash();
-        CameraControl();
 
         PlayerUI();
         AnimationFunction();
@@ -433,13 +431,6 @@ public class PlayerMovement :    MonoBehaviour
             ChangeAnimation("Idle");
     }
 
-    void CameraControl()
-    {
-        Vector3 target = new Vector3(cameraOffset * playerDirection, cameraY, -14);
-        mainCamera.transform.localPosition = Vector3.Lerp(mainCamera.transform.localPosition, target, Time.deltaTime * cameraSmoothSpeed);
-        // set camera Y
-        mainCamera.transform.position = new Vector3(mainCamera.transform.position.x, cameraY, -14);
-    }
     #endregion
 
     #region DAMAGE & KNOCKBACK

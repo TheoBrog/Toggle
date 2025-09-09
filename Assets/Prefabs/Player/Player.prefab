@@ -387,12 +387,12 @@ MonoBehaviour:
   state: 0
   canMove: 1
   canFall: 1
+  playerObj: {fileID: 4696589168633223084}
   toggleDelayUI: {fileID: 0}
   dashDelayUI: {fileID: 0}
   mainCamera: {fileID: 0}
   cameraOffset: 2
   cameraSmoothSpeed: 6
-  cameraY: 3
   horizontalSpeed: 10
   dashPower: 33
   dashLength: 12
@@ -515,7 +515,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
 --- !u!95 &6450333466668259571
