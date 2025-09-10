@@ -11,6 +11,7 @@ public class ToggleScript : MonoBehaviour
     float distance;
 
     public int currentSide;
+    public LayerMask groundMask;
 
     [Header("Time")]
     public float transitionTime;
@@ -68,7 +69,7 @@ public class ToggleScript : MonoBehaviour
     void Toggle()
     {
         // Detectar uma parede atrás do player
-        if (Physics.Raycast(transform.position, Vector3.forward, distance + 1))
+        if (Physics.Raycast(transform.position, Vector3.forward, distance + 1, groundMask))
             return;
 
         // Executar Toggle se não havia parede

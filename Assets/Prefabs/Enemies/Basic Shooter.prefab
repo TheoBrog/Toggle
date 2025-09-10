@@ -55,6 +55,7 @@ MonoBehaviour:
   enemyType: 0
   damageClip: {fileID: 8300000, guid: cabf5c434a9a4c84694244c9d91a91fe, type: 3}
   flash: {fileID: 8727590633720245037, guid: f551afe94d4d8f243a9a8c0ce402d52f, type: 3}
+  deadObj: []
   bulletProperties:
     bulletPrefab: {fileID: 2089412692424116438, guid: 2730f7d6286812d48ab93a070455c595, type: 3}
     speed: 15
@@ -183,7 +184,7 @@ Transform:
   m_GameObject: {fileID: 2848378926039029201}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -386,7 +387,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: -1376684258, guid: e1cd448ef1534c442890416e3e453097, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

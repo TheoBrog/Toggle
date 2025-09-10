@@ -11,6 +11,9 @@ public class PlayerCamera : MonoBehaviour
     float cameraY;
     float cameraZ;
 
+    bool cameraStatic;
+    Vector3 positionStatic;
+
     float velocityX;
 
     void Start()
@@ -29,15 +32,32 @@ public class PlayerCamera : MonoBehaviour
 
     void CameraControl()
     {
-        float targetX = (cameraOffset * playerMovement.playerDirection) + playerTransform.position.x;
+        if (!cameraStatic)
+        {
+            float targetX = (cameraOffset * playerMovement.playerDirection) + playerTransform.position.x;
 
-        float smoothX = Mathf.SmoothDamp(
-            transform.position.x,
-            targetX,
-            ref velocityX,
-            1f / cameraSmoothSpeed // menor valor = resposta mais rápida
-        );
+            float smoothX = Mathf.SmoothDamp(
+                transform.position.x,
+                targetX,
+                ref velocityX,
+                1f / cameraSmoothSpeed // menor valor = resposta mais rápida
+            );
 
-        transform.position = new Vector3(smoothX, cameraY, cameraZ);
+            transform.position = new Vector3(smoothX, cameraY, cameraZ);
+        }
+        else
+        {
+            
+        }
+    }
+
+    public void StaticCamera(Transform position)
+    {
+
+    }
+
+    public void UnStaticCamera()
+    {
+        
     }
 }

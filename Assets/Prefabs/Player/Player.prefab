@@ -280,7 +280,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 0
   m_Sprite: {fileID: -455011246, guid: 2254bc7eefe17f54e9f777b6cc0e1bbb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -394,6 +394,7 @@ MonoBehaviour:
   cameraOffset: 2
   cameraSmoothSpeed: 6
   horizontalSpeed: 10
+  playerDirection: 1
   dashPower: 33
   dashLength: 12
   jumpPower: 12
@@ -427,6 +428,9 @@ MonoBehaviour:
   - {fileID: 0}
   sideColors: []
   currentSide: 0
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 8
   transitionTime: 0.25
   toggleDelay: 0.75
   maxToggleDelay: 0.75
