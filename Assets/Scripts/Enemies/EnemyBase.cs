@@ -53,6 +53,8 @@ public class EnemyBase : MonoBehaviour
         damageFlash = GetComponent<DamageFlash>();
 
         GameManager.instance.enemiesInScene.Add(transform.gameObject);
+
+        ApplyColorFromSideSettings();
     }
 
     public virtual void TakeDamage(float dmg)
@@ -70,7 +72,7 @@ public class EnemyBase : MonoBehaviour
         isAlive = false;
 
         GameManager.instance.enemiesInScene.Remove(transform.gameObject);
-        GameManager.enemyDeath?.Invoke(transform.gameObject);
+        GameManager.enemyDeath?.Invoke(transform.gameObject);        
 
         if (deadObj.Length > 0)
         {
@@ -81,10 +83,16 @@ public class EnemyBase : MonoBehaviour
             foreach (GameObject d in deadObj)
             {
                 d.SetActive(true);
-                SpriteRenderer s = d.GetComponent<SpriteRenderer>();
-                
-                s.flipX = transform.GetChild(0).GetComponent<SpriteRenderer>().flipX;
-                s.color = Color.gray;
+                SpriteRenderer sr = d.GetComponent<SpriteRenderer>();
+                float darkenAmount = 0.5f;
+
+                Color original = sr.color;
+                sr.color = new Color(
+                    original.r * darkenAmount,
+                    original.g * darkenAmount,
+                    original.b * darkenAmount,
+                    original.a // mantém a transparência
+                );
             }
         }
         else
@@ -94,9 +102,6 @@ public class EnemyBase : MonoBehaviour
         {
             Destroy(comp);
         }    
-    
-        // Debug.Log("Killed " + enemyName);
-        // Destroy(transform.gameObject);
     }
 
     protected virtual void PlayFlash()
@@ -112,6 +117,46 @@ public class EnemyBase : MonoBehaviour
         // Debug.Log("Deleted " + enemyName);
         GameManager.instance.enemiesInScene.Remove(transform.gameObject);
         Destroy(transform.gameObject);
+    }
+
+    protected virtual void ApplyColorFromSideSettings()
+    {
+        // tenta achar o SideSettings em até 5 níveis
+        SideSettings settings = GetSideSettings();
+        if (settings == null) return;
+
+        Color targetColor = settings.color;
+
+        // pega todos os SpriteRenderers nos filhos
+        SpriteRenderer[] renderers = GetComponentsInChildren<SpriteRenderer>();
+        foreach (SpriteRenderer sr in renderers)
+        {
+            if (sr.gameObject != this.gameObject) // não muda o do objeto atual
+            {
+                sr.color = targetColor;
+            }
+        }
+    }
+
+    SideSettings GetSideSettings()
+    {
+        Transform current = transform;
+        int limit = 5;
+
+        for (int i = 0; i < limit; i++)
+        {
+            if (current == null) break;
+
+            SideSettings settings = current.GetComponent<SideSettings>();
+            if (settings != null)
+            {
+                return settings;
+            }
+
+            current = current.parent;
+        }
+
+        return null;
     }
 
     void Reset()
