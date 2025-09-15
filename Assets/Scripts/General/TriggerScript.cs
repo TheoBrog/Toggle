@@ -28,7 +28,7 @@ public class TriggerScript : MonoBehaviour
 
     void OnTriggerExit(Collider collider)
     {
-        if (collider.CompareTag("Player") && hasExited)
+        if (collider.CompareTag("Player") && !hasExited)
         {
             foreach (UnityEvent e in onExitEvents)
             {
