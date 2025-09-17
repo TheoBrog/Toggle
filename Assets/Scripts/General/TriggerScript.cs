@@ -12,6 +12,11 @@ public class TriggerScript : MonoBehaviour
     bool hasEntered;
     bool hasExited;
 
+    void Start()
+    {
+        GetComponent<Renderer>().enabled = false;
+    }
+
     void OnTriggerEnter(Collider collider)
     {
         if (collider.CompareTag("Player") && !hasEntered)

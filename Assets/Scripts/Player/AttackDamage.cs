@@ -18,5 +18,13 @@ public class AttackDamage : MonoBehaviour
             obj.GetComponent<EnemyBase>().TakeDamage(damage);
             playerMovement.StartCoroutine(playerMovement.AttackKnockback());
         }
+
+        if (obj.GetComponent<ObjectInteraction>())
+        {
+            ObjectInteraction oi = obj.GetComponent<ObjectInteraction>();
+            oi.Activate();
+            if (oi.knockbackPlayer)
+                playerMovement.StartCoroutine(playerMovement.AttackKnockback());                
+        }
     }
 }
