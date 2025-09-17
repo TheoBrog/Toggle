@@ -124,7 +124,7 @@ MonoBehaviour:
   deadObj:
   - {fileID: 8727021651682220488}
   walkspeed: 4
-  runSpeed: 10
+  runSpeed: 7
   height: 0
   wallDetectionRaycast: 1.5
   avoidFalling: 1

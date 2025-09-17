@@ -8,6 +8,8 @@ public class DoorTrigger : MonoBehaviour
     {
         if (enemyDoor == null)
             enemyDoor = transform.parent.GetComponent<EnemyDoor>();
+
+        GetComponent<Renderer>().enabled = false;
     }
 
     void OnTriggerEnter(Collider col)

@@ -8,7 +8,7 @@ public class EnemyDoor : MonoBehaviour
     List<GameObject> enemies = new();
     List<GameObject> deadEnemies = new();
 
-    public GameObject[] doors;
+    public DoorClass[] doors;
     bool spawned = false;
     bool ended = false;
 
@@ -20,6 +20,10 @@ public class EnemyDoor : MonoBehaviour
     void Start()
     {
         Door(false);
+        foreach (DoorClass dc in doors)
+        {
+            dc.door.transform.SetParent(dc.side);
+        }
     }
 
     #region Sequence
@@ -85,15 +89,36 @@ public class EnemyDoor : MonoBehaviour
         Door(false);
         ended = true;
         GameManager.onDeath -= ResetDoors;
+        Invoke(nameof(DeleteDoors), .25f);
     }
 
     void Door(bool state)
     {
-        foreach (GameObject d in doors)
+        foreach (DoorClass dc in doors)
         {
-            d.SetActive(state);
+            GameObject d = dc.door;
+
+            if (d.GetComponent<Animator>())
+            {
+                if (state)
+                    d.GetComponent<Animator>().Play("Close");
+                else
+                    d.GetComponent<Animator>().Play("Open");
+            }
+            else
+                d.SetActive(state);
         }
     }
+
+    void DeleteDoors()
+    {
+        // foreach (DoorClass dc in doors)
+        // {
+        //     GameObject d = dc.door;
+        //     Destroy(d);
+        // }
+    }
+
     #endregion
 
     #region Waves
@@ -104,7 +129,7 @@ public class EnemyDoor : MonoBehaviour
             if (enemy.spawnWave == currentWave)
             {
                 GameObject obj = Instantiate(enemy.enemyPrefab);
-                obj.transform.parent = enemy.side;
+                obj.transform.SetParent(enemy.side);
                 obj.transform.position = enemy.spawnPosition.position;
                 Vector3 pos = obj.transform.localPosition;
                 obj.transform.localPosition = new Vector3(pos.x, pos.y, 0);
@@ -160,7 +185,7 @@ public class EnemyDoor : MonoBehaviour
         if (fromTrigger != null)
             fromTrigger.SetActive(true);
         spawned = false;
-    }    
+    }
 
     void OnEnable()
     {
@@ -180,5 +205,12 @@ public class EnemyDoor : MonoBehaviour
 
         public Transform side;
         public int spawnWave;
+    }
+
+    [System.Serializable]
+    public class DoorClass
+    {
+        public GameObject door;
+        public Transform side;
     }
 }
