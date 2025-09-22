@@ -28,7 +28,7 @@ public class LeverScript : ObjectInteraction
         if (!debounce)
             return;
 
-        Debug.Log("activate lever");
+        // Debug.Log("activate lever");
 
         debounce = false;
         if (!currentState)

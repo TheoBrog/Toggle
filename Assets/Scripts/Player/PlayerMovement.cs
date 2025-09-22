@@ -498,10 +498,23 @@ public class PlayerMovement :    MonoBehaviour
     }
     #endregion
 
+    void EndLevel()
+    {
+        gameObject.SetActive(false);
+    }
+
     void OnEnable()
     {
+        GameManager.endLevel += EndLevel;
         GameManager.onToggle += PlayerUIColorUpdate;
         GameManager.onDeath += PlayerUIColorUpdate;
+    }
+
+    void OnDisable()
+    {
+        GameManager.endLevel -= EndLevel;
+        GameManager.onToggle -= PlayerUIColorUpdate;
+        GameManager.onDeath -= PlayerUIColorUpdate;
     }
 
     [System.Serializable]

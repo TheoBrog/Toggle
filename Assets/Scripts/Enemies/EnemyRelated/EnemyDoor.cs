@@ -22,7 +22,8 @@ public class EnemyDoor : MonoBehaviour
         Door(false);
         foreach (DoorClass dc in doors)
         {
-            dc.door.transform.SetParent(dc.side);
+            dc.door.transform.SetParent(dc.side.transform);
+            dc.door.GetComponentInChildren<SpriteRenderer>().color = dc.side.GetComponent<SideSettings>().color;
         }
     }
 
@@ -89,7 +90,7 @@ public class EnemyDoor : MonoBehaviour
         Door(false);
         ended = true;
         GameManager.onDeath -= ResetDoors;
-        Invoke(nameof(DeleteDoors), .25f);
+        // Invoke(nameof(DeleteDoors), .25f);
     }
 
     void Door(bool state)
@@ -112,11 +113,11 @@ public class EnemyDoor : MonoBehaviour
 
     void DeleteDoors()
     {
-        // foreach (DoorClass dc in doors)
-        // {
-        //     GameObject d = dc.door;
-        //     Destroy(d);
-        // }
+        foreach (DoorClass dc in doors)
+        {
+            GameObject d = dc.door;
+            Destroy(d);
+        }
     }
 
     #endregion
@@ -193,6 +194,12 @@ public class EnemyDoor : MonoBehaviour
         GameManager.onDeath += ResetDoors;
         GameManager.enemyDeath += EnemyDied;
     }
+
+    void OnDisable()
+    {
+        GameManager.onDeath -= ResetDoors;
+        GameManager.enemyDeath -= EnemyDied;
+    }
     #endregion
 
     [System.Serializable]
@@ -211,6 +218,6 @@ public class EnemyDoor : MonoBehaviour
     public class DoorClass
     {
         public GameObject door;
-        public Transform side;
+        public GameObject side;
     }
 }

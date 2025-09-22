@@ -507,7 +507,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Settings
+  m_text: 'CONFIGURACOES
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e3e60adce1c98f942ad2d2a2aa229e92, type: 2}
   m_sharedMaterial: {fileID: 1332285890041986133, guid: e3e60adce1c98f942ad2d2a2aa229e92, type: 2}
@@ -1120,7 +1122,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Menu
+  m_text: menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e3e60adce1c98f942ad2d2a2aa229e92, type: 2}
   m_sharedMaterial: {fileID: 1332285890041986133, guid: e3e60adce1c98f942ad2d2a2aa229e92, type: 2}
@@ -1256,7 +1258,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Continue
+  m_text: 'CONTINUAR
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e3e60adce1c98f942ad2d2a2aa229e92, type: 2}
   m_sharedMaterial: {fileID: 1332285890041986133, guid: e3e60adce1c98f942ad2d2a2aa229e92, type: 2}

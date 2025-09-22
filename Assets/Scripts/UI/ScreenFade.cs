@@ -29,4 +29,19 @@ public class ScreenFade : MonoBehaviour
     {
         anim.Play("FadeOut", -1, 0);
     }
+
+    void EndLevel()
+    {
+        FadeOut();
+    }
+
+    void OnEnable()
+    {
+        GameManager.endLevel += EndLevel;
+    }
+
+    void OnDisable()
+    {
+        GameManager.endLevel -= EndLevel;        
+    }
 }

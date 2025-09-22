@@ -10,7 +10,7 @@ public class MenuScript : MonoBehaviour
     public GameObject settingsObject;
     public GameObject settingsFirst;
 
-    public void PlayButton(int scene)
+    public void PlayButton(string scene)
     {
         SceneManager.LoadScene(scene);
     }
