@@ -31,4 +31,9 @@ public class DamageBlock : MonoBehaviour
             //StartCoroutine(playerMovement.Knockback(knockback));
         }
     }
+
+    void Reset()
+    {
+        GetComponent<Collider>().isTrigger = true;
+    }
 }

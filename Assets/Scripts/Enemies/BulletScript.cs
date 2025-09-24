@@ -15,6 +15,8 @@ public class BulletScript : MonoBehaviour
     DamageBlock damageBlock;
     EnemyDamage enemyDamage;
 
+    Vector3 dir;
+
     void Start()
     {
         boxCollider = GetComponent<BoxCollider>();
@@ -24,16 +26,24 @@ public class BulletScript : MonoBehaviour
 
         damageBlock = GetComponent<DamageBlock>();
         enemyDamage = GetComponent<EnemyDamage>();
+
+        dir = transform.localEulerAngles;
     }
 
     void Update()
     {
         if (!parriedBullet)
+        {
+            transform.localEulerAngles = dir;
             transform.position += transform.forward * speed * Time.deltaTime;
+        }
         else
-            transform.position += transform.forward * -speed * 1.5f * Time.deltaTime;
+        {
+            transform.localEulerAngles = -dir;
+            transform.position += transform.forward * speed * 1.5f * Time.deltaTime;
+        }
         //transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, 0);
-    }
+        }
 
     void OnTriggerEnter(Collider col)
     {

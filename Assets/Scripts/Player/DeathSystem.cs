@@ -27,7 +27,7 @@ public class DeathSystem : MonoBehaviour
         if (currentCheckpoint != null)
             transform.position = currentCheckpoint.position;
         else
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         GameManager.instance.ResetGame();
     }
 

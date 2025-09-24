@@ -16,6 +16,7 @@ public class EnemyDoor : MonoBehaviour
     int maxWave;
 
     GameObject fromTrigger;
+    bool isReseting = false;
 
     void Start()
     {
@@ -57,7 +58,7 @@ public class EnemyDoor : MonoBehaviour
 
         while (true)
         {
-            while (enemies.Count > 0)
+            while (enemies.Count > 0 || isReseting)
             {
                 yield return new WaitForSeconds(delay);
             }
@@ -86,7 +87,8 @@ public class EnemyDoor : MonoBehaviour
 
     void EndSequence()
     {
-        // Debug.Log("End Waves");
+        if (isReseting) return;
+        Debug.Log("End Waves");
         Door(false);
         ended = true;
         GameManager.onDeath -= ResetDoors;
@@ -166,9 +168,14 @@ public class EnemyDoor : MonoBehaviour
     #region Reseting
     void ResetDoors()
     {
+        // Debug.Log("reset door fun");
         // Evitar bugs
         if (ended)
             return;
+
+        isReseting = true;
+        StopAllCoroutines();
+
         currentWave = 9999;
         // Deletar os inimigos que existem
         foreach (GameObject obj in enemies)
@@ -186,20 +193,24 @@ public class EnemyDoor : MonoBehaviour
         if (fromTrigger != null)
             fromTrigger.SetActive(true);
         spawned = false;
+
+        isReseting = false;
     }
 
     void OnEnable()
     {
-        // Inscreve os devidos eventos
+        // Debug.Log("enable debug");
         GameManager.onDeath += ResetDoors;
         GameManager.enemyDeath += EnemyDied;
     }
 
     void OnDisable()
     {
+        // Debug.Log("disable debug");
         GameManager.onDeath -= ResetDoors;
         GameManager.enemyDeath -= EnemyDied;
     }
+
     #endregion
 
     [System.Serializable]

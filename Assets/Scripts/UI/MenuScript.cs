@@ -10,9 +10,13 @@ public class MenuScript : MonoBehaviour
     public GameObject settingsObject;
     public GameObject settingsFirst;
 
+    public GameObject loadingPanel;
+
     public void PlayButton(string scene)
     {
+        loadingPanel.SetActive(true);
         SceneManager.LoadScene(scene);
+        GameTimer.timeElapsed = 0;
     }
 
     public void SettingsButton()

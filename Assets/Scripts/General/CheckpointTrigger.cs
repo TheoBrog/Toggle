@@ -4,7 +4,8 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class CheckpointTrigger : MonoBehaviour
 {
-    public int side;
+    [HideInInspector] public int side;
+    public ParticleSystem checkpointParticle;
 
     void Start()
     {
@@ -22,6 +23,11 @@ public class CheckpointTrigger : MonoBehaviour
         {
             DeathSystem deathSystem = obj.GetComponent<DeathSystem>();
             deathSystem.NewCheckpoint(transform);
+            if (GetComponent<Renderer>().enabled)
+            {
+                checkpointParticle.Play();
+                GetComponent<Renderer>().enabled = false;
+            }
         }
     }
 
