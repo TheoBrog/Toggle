@@ -40,6 +40,7 @@ public class EnemyBase : MonoBehaviour
     public GameObject flash;
 
     DamageFlash damageFlash;
+    public GameObject particleSpawn;
     
     public GameObject[] deadObj;
     protected bool isAlive = true;
@@ -53,6 +54,12 @@ public class EnemyBase : MonoBehaviour
         damageFlash = GetComponent<DamageFlash>();
 
         GameManager.instance.enemiesInScene.Add(transform.gameObject);
+
+        GameObject p = Instantiate(particleSpawn);
+        p.transform.SetParent(null);
+        p.transform.position = transform.position;
+        p.transform.localEulerAngles = Vector3.zero;
+        Destroy(p, 1f);
 
         ApplyColorFromSideSettings();
     }

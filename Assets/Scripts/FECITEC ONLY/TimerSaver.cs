@@ -7,15 +7,18 @@ public class TimerSaver : MonoBehaviour
 {
     string filePath;
 
-    public TMP_Text text;
+    public TMP_Text timerText;
+    public TMP_Text deathText;
 
     void Start()
     {
         // Pega o caminho da área de trabalho do usuário
         string desktopPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop);
         filePath = Path.Combine(desktopPath, "TemposSalvos.txt");
-        
+
         SaveTime();
+
+        deathText.text = GameTimer.deathCount.ToString();
     }
 
     public void SaveTime()
@@ -32,8 +35,8 @@ public class TimerSaver : MonoBehaviour
         string formattedTime = string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, milliseconds);
 
         // Monta a linha
-        string line = $"Tempo: {formattedTime}";
-        text.text = formattedTime;
+        string line = $"Tempo: {formattedTime} | Falhas: {GameTimer.deathCount}";
+        timerText.text = formattedTime;
 
         // Adiciona no arquivo (AppendText cria se não existir)
         using (StreamWriter sw = File.AppendText(filePath))

@@ -21,6 +21,7 @@ public class DeathSystem : MonoBehaviour
 
     IEnumerator DieCoroutine()
     {
+        GameTimer.deathCount++;
         playerMovement.health = playerMovement.maxHealth;
         GetComponent<ToggleScript>().FindRightSideForCheckpoints();
         yield return null;

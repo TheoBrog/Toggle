@@ -88,7 +88,7 @@ public class EnemyDoor : MonoBehaviour
     void EndSequence()
     {
         if (isReseting) return;
-        Debug.Log("End Waves");
+        // Debug.Log("End Waves");
         Door(false);
         ended = true;
         GameManager.onDeath -= ResetDoors;

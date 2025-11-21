@@ -121,6 +121,7 @@ MonoBehaviour:
   enemyType: 0
   damageClip: {fileID: 8300000, guid: cabf5c434a9a4c84694244c9d91a91fe, type: 3}
   flash: {fileID: 8727590633720245037, guid: f551afe94d4d8f243a9a8c0ce402d52f, type: 3}
+  particleSpawn: {fileID: 881755337887368841, guid: 1fa960f939432074b9da09ce863b5c16, type: 3}
   deadObj:
   - {fileID: 8727021651682220488}
   walkspeed: 4

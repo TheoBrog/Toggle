@@ -17,6 +17,7 @@ public class MenuScript : MonoBehaviour
         loadingPanel.SetActive(true);
         SceneManager.LoadScene(scene);
         GameTimer.timeElapsed = 0;
+        GameTimer.deathCount = 0;
     }
 
     public void SettingsButton()
