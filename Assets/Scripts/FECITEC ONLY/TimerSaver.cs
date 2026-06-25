@@ -12,12 +12,6 @@ public class TimerSaver : MonoBehaviour
 
     void Start()
     {
-        // Pega o caminho da área de trabalho do usuário
-        string desktopPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop);
-        filePath = Path.Combine(desktopPath, "TemposSalvos.txt");
-
-        SaveTime();
-
         deathText.text = GameTimer.deathCount.ToString();
     }
 
@@ -37,14 +31,6 @@ public class TimerSaver : MonoBehaviour
         // Monta a linha
         string line = $"Tempo: {formattedTime} | Falhas: {GameTimer.deathCount}";
         timerText.text = formattedTime;
-
-        // Adiciona no arquivo (AppendText cria se não existir)
-        using (StreamWriter sw = File.AppendText(filePath))
-        {
-            sw.WriteLine(line);
-        }
-
-        Debug.Log("Tempo salvo em: " + filePath + " -> " + formattedTime);
     }
 
     public void Voltar()
